@@ -1,4 +1,4 @@
-package com.dongfeng.userservice;
+package com.dongfeng.user;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

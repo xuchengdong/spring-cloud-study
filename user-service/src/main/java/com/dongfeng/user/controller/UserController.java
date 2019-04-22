@@ -1,4 +1,4 @@
-package com.dongfeng.userservice.controller;
+package com.dongfeng.user.controller;
 
 import com.dongfeng.domain.User;
 import org.springframework.web.bind.annotation.GetMapping;
