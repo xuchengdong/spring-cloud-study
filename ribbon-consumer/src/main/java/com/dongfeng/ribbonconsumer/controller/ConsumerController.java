@@ -2,9 +2,7 @@ package com.dongfeng.ribbonconsumer.controller;
 
 import com.dongfeng.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
@@ -19,8 +17,25 @@ public class ConsumerController {
         return restTemplate.getForEntity("http://HELLO-SERVICE/hello", String.class).getBody();
     }
 
-    @GetMapping("/user")
-    public User userConsumer(long id) {
-        return restTemplate.getForEntity("http://USER-SERVICE/user?id={1}", User.class, id).getBody();
+    @PostMapping("/user")
+    public String add(@RequestBody User user) {
+        return restTemplate.postForObject("http://USER-SERVICE/user", user, String.class);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public String delete(@PathVariable("id") Long id) {
+        restTemplate.delete("http://USER-SERVICE/users/{1}", id);
+        return "success";
+    }
+
+    @PutMapping("/user")
+    public String update(@RequestBody User user) {
+        restTemplate.put("http://USER-SERVICE/user", user);
+        return "success";
+    }
+
+    @GetMapping("/users/{id}")
+    public User get(@PathVariable("id") Long id) {
+        return restTemplate.getForObject("http://USER-SERVICE/users/{1}", User.class, id);
     }
 }
