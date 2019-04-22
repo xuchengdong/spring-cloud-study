@@ -1,6 +1,7 @@
 package com.dongfeng.ribbonconsumer.controller;
 
 import com.dongfeng.domain.User;
+import com.dongfeng.ribbonconsumer.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -12,9 +13,12 @@ public class ConsumerController {
     @Autowired
     RestTemplate restTemplate;
 
+    @Autowired
+    HelloService helloService;
+
     @GetMapping("/hello")
     public String helloConsumer() {
-        return restTemplate.getForEntity("http://HELLO-SERVICE/hello", String.class).getBody();
+        return helloService.hello();
     }
 
     @PostMapping("/user")
